@@ -18,7 +18,7 @@ public class Book {
 	private String isbn;
 	private Float price;
 	
-	protected Book() {}
+	public Book() {}
 	
 	public Book(String title, String author, Integer year, String isbn, Float price) {
 		this.title = title;
@@ -37,7 +37,7 @@ public class Book {
 	public String getAuthor() {
 		return author;
 	}
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
 	public String getIsbn() {
