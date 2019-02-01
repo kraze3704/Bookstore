@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -38,6 +39,12 @@ public class BookController {
 	public String addBookPOST(Book book) {
 		bookRepo.save(book);
 		return "redirect:booklist";
+	}
+	
+	@RequestMapping("/delete/{id}")
+	public String deleteBook(@PathVariable("id") Long bookId) {
+		bookRepo.deleteById(bookId);
+		return "redirect:../booklist";
 	}
 	
 	@Bean
