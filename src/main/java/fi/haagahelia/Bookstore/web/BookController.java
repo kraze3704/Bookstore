@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import fi.haagahelia.Bookstore.domain.Book;
@@ -18,6 +19,12 @@ public class BookController {
 	@RequestMapping("/index")
 	public String home() {
 		return "index";
+	}
+	
+	@RequestMapping("/booklist")
+	public String bookListPage(Model model) {
+		model.addAttribute("Books", bookRepo.findAll());
+		return "booklist";
 	}
 	
 	@Bean
