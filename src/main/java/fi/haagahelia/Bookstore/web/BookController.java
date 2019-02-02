@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import fi.haagahelia.Bookstore.domain.Book;
 import fi.haagahelia.Bookstore.domain.BookRepository;
+import fi.haagahelia.Bookstore.domain.CateRepository;
+import fi.haagahelia.Bookstore.domain.Category;
 
 @Controller
 public class BookController {
 
 	@Autowired
 	private BookRepository bookRepo;
+	@Autowired
+	private CateRepository cateRepo;
 	
 	@RequestMapping("/index")
 	public String home() {
@@ -32,6 +36,7 @@ public class BookController {
 	@RequestMapping("/addBook")
 	public String addBook(Model model) {
 		model.addAttribute("Book", new Book());
+		model.addAttribute("Categories", cateRepo.findAll());
 		return "addBook";
 	}
 	
@@ -50,19 +55,28 @@ public class BookController {
 	@RequestMapping("/edit/{id}")
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
 		model.addAttribute("Book", bookRepo.findById(bookId));
+		model.addAttribute("Categories", cateRepo.findAll());
 		return "editBook";
 	}
 	
 	@Bean
 	public CommandLineRunner demo() {
 		return (args) -> {
-			Book book1 = new Book("Server Programming", "Juha", 2019, "SWD4TF021", (float) 30.02);
-			Book book2 = new Book("Database Developer", "Kari", 2019, "SWD8TF040", (float) 30.02);
-			Book book3 = new Book("Software Project", "Juhani", 2019, "SWD4TF024", (float) 30.01);
+			
+			Category cat1 = new Category("FICTION");
+			Category cat2 = new Category("NONFICTION");
+			
+			cateRepo.save(cat1);
+			cateRepo.save(cat2);
+			
+			Book book1 = new Book("Server Programming", "Juha", 2019, "SWD4TF021", (float) 30.02, cat2);
+			Book book2 = new Book("Database Developer", "Kari", 2019, "SWD8TF040", (float) 30.02, cat2);
+			Book book3 = new Book("Software Project", "Juhani", 2019, "SWD4TF024", (float) 30.01, cat1);
 			
 			bookRepo.save(book1);
 			bookRepo.save(book2);
 			bookRepo.save(book3);
+
 		};
 	}
 }
