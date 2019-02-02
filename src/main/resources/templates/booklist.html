@@ -4,18 +4,21 @@
 
 	<HEAD>
 		<title>BookStore: Listpage</title>
+		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 	</HEAD>
 	
 	<BODY>
 		<h1>Books</h1>
 
 	<div>
-		<table>
+		<table class="table table-striped">
 			<tr>
 				<th>Author</th>
 				<th>Title</th>
 				<th>ISBN</th>
 				<th>Year</th>
+				<th></th>
+				<th></th>
 			</tr>
 
 			<tr th:each="book : ${Books}">
@@ -23,12 +26,12 @@
 				<td th:text="${book.title}">title</td>
 				<td th:text="${book.isbn}">ISBN</td>
 				<td th:text="${book.year}">Year</td>
-				<td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
-				<td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
+				<td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger btn-block">Delete</a></td>
+				<td><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-secondary btn-block">Edit</a></td>
 			</tr>
 		</table>
 		
-		<a href="/addBook">Add Book</a>
+		<a href="/addBook" class="btn btn-success">Add Book</a>
 	</div>
 				
 	</BODY>
