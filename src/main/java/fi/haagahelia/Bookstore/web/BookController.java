@@ -47,6 +47,12 @@ public class BookController {
 		return "redirect:../booklist";
 	}
 	
+	@RequestMapping("/edit/{id}")
+	public String editBook(@PathVariable("id") Long bookId, Model model) {
+		model.addAttribute("Book", bookRepo.findById(bookId));
+		return "editBook";
+	}
+	
 	@Bean
 	public CommandLineRunner demo() {
 		return (args) -> {
