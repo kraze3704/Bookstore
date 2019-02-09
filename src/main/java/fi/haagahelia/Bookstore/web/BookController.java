@@ -1,5 +1,8 @@
 package fi.haagahelia.Bookstore.web;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import fi.haagahelia.Bookstore.domain.Book;
 import fi.haagahelia.Bookstore.domain.BookRepository;
@@ -58,6 +62,22 @@ public class BookController {
 		model.addAttribute("Categories", cateRepo.findAll());
 		return "editBook";
 	}
+	
+	@RequestMapping("/bookREST")
+	public @ResponseBody List<Book> bookListREST() {
+		return (List<Book>) bookRepo.findAll();
+	}
+	
+	@RequestMapping("/bookREST/{id}")
+	public @ResponseBody Optional<Book> findBookREST(@PathVariable("id") Long bookId) {
+		return bookRepo.findById(bookId);
+	}
+	
+	/*
+	 * works?
+	 * 
+	 * curl -i -X POST -H "content-type:application/json" -d '{ "title": "for testing", "author": "Paul", "year": 2019, "isbn": "123456", "price": 22.22 }' http://localhost:8080/api/books
+	*/
 	
 	@Bean
 	public CommandLineRunner demo() {
