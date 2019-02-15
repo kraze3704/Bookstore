@@ -18,9 +18,10 @@
 			<label for="isbn">ISBN</label>
 			<input type="text" id="isbn" th:field="*{isbn}" />
 			<label for="year">Year</label>
-			<input type="number" id="year" th:field="*{year}" />
+			<input type="number" min="0" id="year" th:field="*{year}" />
 			<label for="price">Price</label>
-			<input type="number" id="price" th:field="*{price}" />
+			<!-- 	step="0.01" allows two decimal points, min="0" allows only positive values -->
+			<input type="number" step="0.01" min="0" id="price" th:field="*{price}" />
 			
 			<label for="catelist">Category</label>
 			<select id="catelist" th:field="*{category}">
