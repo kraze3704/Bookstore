@@ -8,6 +8,13 @@
 	</HEAD>
 	
 	<BODY>
+	
+	<div>
+		<form th:action="@{/logout}" method="POST">
+			<span th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]! <input type="submit" value="Sign Out" /> </span>
+		</form>
+	</div>
+	
 		<h1>Books</h1>
 
 	<div>

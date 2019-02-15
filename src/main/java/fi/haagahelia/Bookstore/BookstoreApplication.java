@@ -4,6 +4,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import fi.haagahelia.Bookstore.domain.Book;
 import fi.haagahelia.Bookstore.domain.BookRepository;
@@ -36,6 +40,17 @@ public class BookstoreApplication {
 			bookRepo.save(book3);
 
 		};
+	}
+	
+	@Bean
+	public UserDetailsService userDetailsService() {
+		UserDetails user = User.withDefaultPasswordEncoder()
+				.username("user")
+				.password("password")
+				.roles("user")
+				.build();
+		
+		return new InMemoryUserDetailsManager(user);
 	}
 }
 

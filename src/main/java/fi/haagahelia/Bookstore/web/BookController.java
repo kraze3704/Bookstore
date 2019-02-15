@@ -72,10 +72,14 @@ public class BookController {
 	public @ResponseBody Optional<Book> findBookREST(@PathVariable("id") Long bookId) {
 		return bookRepo.findById(bookId);
 	}
-	
 	/*
 	 * works?
 	 * 
 	 * curl -i -X POST -H "content-type:application/json" -d '{ "title": "for testing", "author": "Paul", "year": 2019, "isbn": "123456", "price": 22.22 }' http://localhost:8080/api/books
 	*/
+	
+	@RequestMapping("/login")
+	public String loginPage() {
+		return "login";
+	}
 }
