@@ -20,13 +20,17 @@ public class User {
 	@Column(name = "password", nullable = false)
 	private String passwordHash;
 	
+	@Column(name = "email", nullable = true)
+	private String email;
+	
 	@Column(name = "role", nullable = false)
 	private String role;
 	
 	public User() {};
-	public User(String username, String passwordH, String role) {
+	public User(String username, String passwordH, String email, String role) {
 		this.username = username;
 		this.passwordHash = passwordH;
+		this.email = email;
 		this.role = role;
 	}
 	
