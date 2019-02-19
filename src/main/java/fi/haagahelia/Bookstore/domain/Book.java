@@ -38,6 +38,11 @@ public class Book {
 		this.category = category;
 	}
 	
+	@Override
+	public String toString() {
+		return "title: " + title + "author: " + author + " category: " + category;
+	}
+	
 	public Long getId() {
 		return id;
 	}

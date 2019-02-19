@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 
-<HTML xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<HTML xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 	<HEAD>
 		<title>BookStore: Listpage</title>
@@ -25,8 +26,7 @@
 				<th>ISBN</th>
 				<th>Year</th>
 				<th>Category</th>
-				<th></th>
-				<th></th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
 			</tr>
 
 			<tr th:each="book : ${Books}">
@@ -36,8 +36,10 @@
 				<td th:text="${book.year}">Year</td>
 				<td th:text="${book.category.name}">Category</td>
 				
-				<td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger btn-block">Delete</a></td>
-				<td><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-secondary btn-block">Edit</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')">
+					<a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger btn-block">Delete</a>
+					<a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-secondary btn-block">Edit</a>
+				</td>
 			</tr>
 		</table>
 		
