@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 
-<HTML xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
+<HTML xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	<HEAD>
 		<title>BookStore</title>
 	</HEAD>
@@ -14,5 +14,18 @@
 		</div>
 		!-->
 		<a href="/booklist">to booklist page</a>
+
+		<div sec:authorize="isAuthenticated()">
+		>>Authenticated
+			<p sec:authorize="hasAuthority('ADMIN')">ADMIN LOGIN</p>
+			<div>
+				Authenticated user:
+				<span sec:authentication="name"></span>
+			</div>
+			<div>
+				user role:
+				<span sec:authentication="principal.authorities"></span>
+			</div>
+		</div>
 	</BODY>
 </HTML>
